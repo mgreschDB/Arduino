@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Arduino IDE Build-Dateien
+**/build/
+**/preproc/
+
+# Kiro interne Dateien
+.kiro/settings/
+
+# IDE Dateien
+.vscode/
+*.swp
+*.swo
+
+# Temporaere Dateien
+*.tmp
+*.bak
+*~
