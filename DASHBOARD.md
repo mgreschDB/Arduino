@@ -1,6 +1,6 @@
 # Projekt-Dashboard
 
-> Letzte Aktualisierung: 2026-08-26
+> Letzte Aktualisierung: 2026-08-27
 
 ---
 
@@ -8,14 +8,14 @@
 
 | Metrik | Wert |
 |---|---|
-| Projekte gesamt | 14 |
+| Projekte gesamt | 15 |
 | Abgeschlossen | 0 |
-| In Arbeit | 0 |
+| In Arbeit | 1 |
 | Geplant | 14 |
 | **Fortschritt** | **0%** |
 
 ```
-[..............] 0/14 Projekte
+[>..............] 0/15 Projekte (1 in Arbeit)
 ```
 
 ---
@@ -24,6 +24,7 @@
 
 | # | Projekt | Schwierigkeit | Status | Datum Start | Datum Fertig |
 |---|---|---|---|---|---|
+| -- | **Drehzahlmesser (Luefter RPM)** | :yellow_circle: Leicht Fortgeschritten | :large_blue_circle: In Arbeit | 2026-08-27 | - |
 | 01 | Blinkende LED | :green_circle: Anfaenger | :white_circle: Geplant | - | - |
 | 02 | Ampelschaltung | :green_circle: Anfaenger | :white_circle: Geplant | - | - |
 | 03 | Temperatur-/Feuchtigkeitssensor | :green_circle: Anfaenger | :white_circle: Geplant | - | - |
@@ -66,9 +67,10 @@
 
 ## Naechste Schritte
 
-1. **Arduino IDE installieren** (siehe [Software-Setup](docs/software-setup.md))
-2. **Board per USB anschliessen** und Blink-Test machen
-3. **Projekt 01 starten** - Blinkende LED
+1. ~~**Arduino IDE installieren**~~ ERLEDIGT
+2. ~~**Board per USB anschliessen und Blink-Test**~~ ERLEDIGT
+3. **Drehzahlmesser aufbauen** - Verkabelung nach README, Code hochladen
+4. **Beide Luefter messen und vergleichen**
 
 ---
 
@@ -79,6 +81,9 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | Datum | Notiz |
 |---|---|
 | 2026-08-26 | Projektrepository angelegt, Dokumentation erstellt |
+| 2026-08-27 | Arduino IDE installiert, Blink-Test erfolgreich |
+| 2026-08-27 | Zusatzteile bestellt: Gabellichtschranke, IR-Reflexionssensor, WLAN, Bluetooth, LED-Streifen, OLED |
+| 2026-08-27 | Drehzahlmesser-Projekt gestartet (Gabellichtschranke + LCD 1602) |
 
 ---
 
