@@ -33,131 +33,346 @@ Beide Luefter haben **7 Blaetter** und **2 Kabel** (kein Tachosignal).
 
 ---
 
-## Verkabelung
+## Verkabelung - Ausfuehrliche Anleitung
 
 ### WICHTIG - Bitte zuerst lesen!
 
 - Den Arduino **NICHT** am USB anschliessen, solange du verkabelst
-- Immer erst alles stecken, dann kontrollieren, DANN USB rein
+- Das 9V-Netzteil **NICHT** einstecken, solange du verkabelst
+- Immer erst ALLES stecken, dann kontrollieren, DANN Strom rein
 - LEDs und das Display haben eine Polaritaet (Plus/Minus beachten)
 
 ---
 
-### LCD 1602A (16 Pins) an Arduino Mega
+### So ist das Breadboard aufgebaut (kurze Erklaerung)
 
-Das LCD hat 16 Pins. Die sind von links nach rechts nummeriert (wenn du auf
-die Vorderseite schaust, Pins oben): 1 bis 16.
+```
+       Stromleisten oben
+  + (rot)  =======================================  ← hier fliesst ueberall 5V
+  - (blau) =======================================  ← hier ist ueberall GND (Masse)
 
-Das Potentiometer regelt den **Kontrast** des Displays. Ohne Poti siehst du nichts!
+       Steckbereich (a-e und f-j)
+  Reihe 1:  a b c d e | | f g h i j     ← a-e sind verbunden, f-j sind verbunden
+  Reihe 2:  a b c d e | | f g h i j        Der Graben in der Mitte TRENNT
+  Reihe 3:  a b c d e | | f g h i j
+  ...                  | |
+  Reihe 63: a b c d e | | f g h i j
 
-| LCD Pin | Name | Verbindung | Erklaerung |
-|---|---|---|---|
-| 1 | VSS | GND (Arduino) | Masse/Minus |
-| 2 | VDD | 5V (Arduino) | Stromversorgung Plus |
-| 3 | V0 | Poti Mittelpin | Kontrast-Regelung |
-| 4 | RS | Arduino Pin 12 | Register Select (Befehl oder Daten) |
-| 5 | RW | GND (Arduino) | Read/Write - auf GND = nur Schreiben |
-| 6 | E | Arduino Pin 11 | Enable (Freigabe) |
-| 7 | D0 | nicht anschliessen | Datenpin (brauchen wir nicht) |
-| 8 | D1 | nicht anschliessen | Datenpin (brauchen wir nicht) |
-| 9 | D2 | nicht anschliessen | Datenpin (brauchen wir nicht) |
-| 10 | D3 | nicht anschliessen | Datenpin (brauchen wir nicht) |
-| 11 | D4 | Arduino Pin 5 | Datenpin (4-Bit Modus) |
-| 12 | D5 | Arduino Pin 4 | Datenpin (4-Bit Modus) |
-| 13 | D6 | Arduino Pin 3 | Datenpin (4-Bit Modus) |
-| 14 | D7 | Arduino Pin 2 | Datenpin (4-Bit Modus) |
-| 15 | A (Anode) | 5V ueber 220-Ohm-Widerstand | Hintergrundbeleuchtung Plus |
-| 16 | K (Kathode) | GND (Arduino) | Hintergrundbeleuchtung Minus |
+       Stromleisten unten
+  + (rot)  =======================================  ← hier fliesst ueberall 5V
+  - (blau) =======================================  ← hier ist ueberall GND (Masse)
+```
 
-**Das Potentiometer (Kontrast):**
-- Linker Pin → 5V (Arduino)
-- Mittlerer Pin → LCD Pin 3 (V0)
-- Rechter Pin → GND (Arduino)
-
-> **Tipp:** Wenn du nach dem Einschalten nur helle Bloecke siehst, drehe am Poti
-> bis Text sichtbar wird. Das ist voellig normal!
+**Wichtig zu verstehen:**
+- Alle 5 Loecher in einer Reihe (z.B. a1-b1-c1-d1-e1) sind INTERN verbunden
+- Der Graben in der Mitte TRENNT die linke Seite (a-e) von der rechten (f-j)
+- Die Stromleisten (+/-) am Rand laufen laengs durch - alles was du da reinsteckst
+  bekommt den gleichen Strom
+- Wenn du ein Bauteil ueber den Graben steckst, sind links und rechts getrennt
+  zugaenglich - genau das nutzen wir beim LCD!
 
 ---
 
-### Gabellichtschranke LM393 an Arduino Mega
+### Das Breadboard Power Supply Modul
 
-Die Lichtschranke hat meistens 3 oder 4 Pins auf der Platine.
+Dein Stromversorgungsmodul steckt auf einer Seite des Breadboards
+auf die + und - Leisten. Es hat:
+- Einen **DC-Eingang** fuer das 9V Netzteil
+- Einen **USB-Eingang** (alternativ)
+- **Jumper** zum Umschalten zwischen 3.3V und 5V
+- Einen **Ein/Aus-Schalter**
 
-| Sensor-Pin | Verbindung | Erklaerung |
-|---|---|---|
-| VCC | 5V (Arduino) | Stromversorgung Plus |
-| GND | GND (Arduino) | Masse/Minus |
-| D0 (oder OUT) | Arduino Pin 18 (Interrupt) | Digitales Signal - wird LOW wenn ein Blatt durchlaeuft |
-| A0 (falls vorhanden) | nicht anschliessen | Analoges Signal (brauchen wir nicht) |
+**WICHTIG: Stelle BEIDE Jumper auf 5V!** (nicht auf 3.3V, sonst geht das LCD nicht)
 
-> **Warum Pin 18?** Der Arduino Mega hat spezielle Pins die sofort reagieren koennen
-> wenn sich ein Signal aendert. Das nennt man "Interrupt". Pin 18 ist Interrupt 5 auf
-> dem Mega. Bei hohen Drehzahlen (bis 9000 RPM) ist das wichtig, damit kein Impuls
-> verloren geht.
+Das Modul versorgt die Stromleisten des Breadboards mit stabilen 5V.
+Der Luefter und der Sensor bekommen ihren Strom von dort - nicht vom Arduino.
+Der Arduino laeuft separat ueber USB vom PC.
 
 ---
 
-### Luefter an Strom
+### Uebersichtstabelle - Alle Verbindungen auf einen Blick
 
-Die Luefter brauchen 5V und ziehen zu viel Strom fuer einen Arduino-Digitalpin.
-Deshalb schliessen wir sie direkt an die Stromversorgung an:
-
-| Luefter-Kabel | Verbindung | Erklaerung |
+| Von | Nach | Kabelfarbe (Vorschlag) |
 |---|---|---|
-| Rot (+) | 5V Pin am Arduino | Plus/Strom |
-| Schwarz (-) | GND am Arduino | Masse/Minus |
+| **LCD Pin 1** (VSS) | Breadboard **-** Leiste (blau/GND) | Schwarz |
+| **LCD Pin 2** (VDD) | Breadboard **+** Leiste (rot/5V) | Rot |
+| **LCD Pin 3** (V0) | Potentiometer **mittlerer** Pin | Gelb |
+| **LCD Pin 4** (RS) | Arduino **Pin 12** | Gruen |
+| **LCD Pin 5** (RW) | Breadboard **-** Leiste (blau/GND) | Schwarz |
+| **LCD Pin 6** (E) | Arduino **Pin 11** | Blau |
+| LCD Pin 7-10 | NICHTS - frei lassen | - |
+| **LCD Pin 11** (D4) | Arduino **Pin 5** | Orange |
+| **LCD Pin 12** (D5) | Arduino **Pin 4** | Gelb |
+| **LCD Pin 13** (D6) | Arduino **Pin 3** | Gruen |
+| **LCD Pin 14** (D7) | Arduino **Pin 2** | Blau |
+| **LCD Pin 15** (A) | 220-Ohm-Widerstand → dann Breadboard **+** Leiste | Rot |
+| **LCD Pin 16** (K) | Breadboard **-** Leiste (blau/GND) | Schwarz |
+| Poti **linker** Pin | Breadboard **+** Leiste (rot/5V) | Rot |
+| Poti **rechter** Pin | Breadboard **-** Leiste (blau/GND) | Schwarz |
+| Poti **mittlerer** Pin | LCD Pin 3 (siehe oben) | Gelb |
+| Sensor **VCC** | Breadboard **+** Leiste (rot/5V) | Rot |
+| Sensor **GND** | Breadboard **-** Leiste (blau/GND) | Schwarz |
+| Sensor **D0/OUT** | Arduino **Pin 18** | Weiss |
+| Luefter **rot** (+) | Breadboard **+** Leiste (rot/5V) | - |
+| Luefter **schwarz** (-) | Breadboard **-** Leiste (blau/GND) | - |
+| Arduino **GND** | Breadboard **-** Leiste (blau/GND) | Schwarz |
 
-> **Hinweis:** Beide Luefter ziehen zusammen zu viel Strom fuer USB allein.
-> Schliesse immer nur EINEN Luefter gleichzeitig an. Wenn du beide gleichzeitig
-> betreiben willst, brauchst du eine externe 5V-Stromversorgung.
+> **Warum kein Kabel von Arduino 5V zum Breadboard?**
+> Das 9V-Netzteil ueber das Stromversorgungsmodul versorgt das Breadboard mit 5V.
+> Der Arduino bekommt seinen Strom ueber USB. Aber GND (Masse) muss verbunden sein,
+> damit beide die gleiche "Null-Linie" haben - sonst kann der Arduino die Signale
+> vom Sensor nicht richtig lesen!
 
 ---
 
 ## Aufbau Schritt fuer Schritt
 
-### Schritt 1: LCD auf das Breadboard stecken
-- Stecke das LCD mit den 16 Pins in das Breadboard
-- Die Pins sollen in verschiedene Reihen stecken (jeder Pin eine eigene Reihe)
+### Schritt 1: Breadboard vorbereiten
 
-### Schritt 2: LCD Stromversorgung
-- LCD Pin 1 (VSS) → blauer Streifen (GND-Leiste) auf dem Breadboard
-- LCD Pin 2 (VDD) → roter Streifen (5V-Leiste) auf dem Breadboard
-- LCD Pin 5 (RW) → blauer Streifen (GND-Leiste)
-- LCD Pin 16 (K) → blauer Streifen (GND-Leiste)
-- LCD Pin 15 (A) → ueber 220-Ohm-Widerstand → roter Streifen (5V-Leiste)
+1. Das Stromversorgungsmodul sollte auf einer Seite des Breadboards stecken
+   (auf den + und - Leisten)
+2. Pruefe: **Beide Jumper auf 5V** gestellt?
+3. **Noch NICHT** das 9V-Netzteil einstecken!
 
-### Schritt 3: Potentiometer
-- Stecke das Potentiometer ins Breadboard
-- Linker Pin → roter Streifen (5V)
-- Rechter Pin → blauer Streifen (GND)
-- Mittlerer Pin → Kabel zu LCD Pin 3 (V0)
+---
 
-### Schritt 4: LCD Datenkabel zum Arduino
-- LCD Pin 4 (RS) → Arduino Pin 12
-- LCD Pin 6 (E) → Arduino Pin 11
-- LCD Pin 11 (D4) → Arduino Pin 5
-- LCD Pin 12 (D5) → Arduino Pin 4
-- LCD Pin 13 (D6) → Arduino Pin 3
-- LCD Pin 14 (D7) → Arduino Pin 2
+### Schritt 2: LCD ins Breadboard stecken
 
-### Schritt 5: Breadboard-Stromleisten mit Arduino verbinden
-- Roter Streifen → Arduino 5V
-- Blauer Streifen → Arduino GND
+Das LCD hat 16 Pins in einer Reihe. Stecke sie in das Breadboard:
 
-### Schritt 6: Gabellichtschranke
-- VCC → roter Streifen (5V)
-- GND → blauer Streifen (GND)
-- D0/OUT → Arduino Pin 18
+```
+  LCD Display (von vorne gesehen, Pins zeigen nach unten ins Breadboard)
+  +----------------------------------------------------+
+  |                                                    |
+  |            Drehzahlmesser                          |
+  |            RPM: 6420                               |
+  |                                                    |
+  +--|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-------------------+
+     1 2 3 4 5 6 7 8 9 . . . . .16
+     ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓         ↓
+  Breadboard Reihe 1 bis 16
+```
 
-### Schritt 7: Luefter
-- Rotes Kabel → roter Streifen (5V)
-- Schwarzes Kabel → blauer Streifen (GND)
+- Stecke LCD Pin 1 z.B. in **Reihe 1** und LCD Pin 16 in **Reihe 16**
+- Die Pins sollen auf einer Seite des Grabens stecken (z.B. Seite **e**)
+- Dann kannst du auf der gleichen Seite (a, b, c, d) Kabel anschliessen,
+  weil a-e in jeder Reihe intern verbunden sind
 
-### Schritt 8: Positionierung der Lichtschranke
-- Die Luefterblaetter muessen durch die Gabel der Lichtschranke laufen
-- Bei 30mm Lueftern: Positioniere den Sensor so, dass die Blattspitzen
-  durch den Spalt der Gabel fahren
-- Der Sensor muss stabil stehen/liegen, sonst zittern die Werte
+```
+  Breadboard-Ausschnitt (Draufsicht):
+  
+  Reihe:  a   b   c   d   e  ||  f   g   h   i   j
+    1:    [K] [ ] [ ] [ ] [LCD1]              ← LCD Pin 1 steckt in e1
+    2:    [K] [ ] [ ] [ ] [LCD2]              ← LCD Pin 2 steckt in e2
+    3:    [ ] [ ] [ ] [ ] [LCD3]              ← LCD Pin 3 steckt in e3
+    ...
+   16:    [K] [ ] [ ] [ ] [LCD16]             ← LCD Pin 16 steckt in e16
+   17:    [ ] [ ] [ ] [ ] [ ]                 ← frei (fuer Poti etc.)
+   
+  [K] = hier kommt spaeter ein Kabel rein
+  Da a-e in einer Reihe verbunden sind, ist ein Kabel in a1 
+  automatisch mit dem LCD-Pin in e1 verbunden!
+```
+
+---
+
+### Schritt 3: LCD Masse (GND) und Strom (5V) anschliessen
+
+Jetzt die einfachen Verbindungen - alles was an GND oder 5V muss:
+
+**GND-Verbindungen (3 Kabel, am besten schwarze nehmen):**
+
+| Kabel | Von (Breadboard) | Nach |
+|---|---|---|
+| Kabel 1 | **Reihe 1** (= LCD Pin 1 / VSS) z.B. Loch **a1** | **-** Leiste (blau) |
+| Kabel 2 | **Reihe 5** (= LCD Pin 5 / RW) z.B. Loch **a5** | **-** Leiste (blau) |
+| Kabel 3 | **Reihe 16** (= LCD Pin 16 / K) z.B. Loch **a16** | **-** Leiste (blau) |
+
+**5V-Verbindung (1 Kabel, rotes nehmen):**
+
+| Kabel | Von (Breadboard) | Nach |
+|---|---|---|
+| Kabel 4 | **Reihe 2** (= LCD Pin 2 / VDD) z.B. Loch **a2** | **+** Leiste (rot) |
+
+**Hintergrundbeleuchtung (mit Widerstand!):**
+
+| Bauteil/Kabel | Von | Nach |
+|---|---|---|
+| 220-Ohm-Widerstand | **Reihe 15** z.B. Loch **a15** (= LCD Pin 15 / A) | **Reihe 20** z.B. Loch **a20** (freie Reihe) |
+| Kabel 5 (rot) | **Reihe 20** z.B. Loch **b20** | **+** Leiste (rot) |
+
+> **Was ist der Widerstand?** Er begrenzt den Strom fuer die Hintergrundbeleuchtung,
+> damit die LED im Display nicht kaputt geht. Stell dir einen Wasserhahn vor der
+> nicht ganz aufgedreht ist - genau das macht der Widerstand mit dem Strom.
+>
+> **Wie erkenne ich 220 Ohm?** Farbcode auf dem Widerstand: **Rot - Rot - Braun**
+> (und dann Gold oder Silber fuer die Toleranz). Schau auf die Widerstandskarte
+> aus dem Kit falls du unsicher bist.
+
+---
+
+### Schritt 4: Potentiometer anschliessen (fuer LCD-Kontrast)
+
+Das Potentiometer (der kleine Trimmer mit 3 Beinchen) regelt den Kontrast.
+Ohne ihn siehst du auf dem Display entweder nichts oder nur helle Bloecke.
+
+1. Stecke das Poti ins Breadboard, z.B. in **Reihe 18, 19, 20** (oder wo Platz ist)
+   - Es hat 3 Beinchen die in 3 verschiedene Reihen muessen
+
+2. Verbindungen:
+
+| Kabel | Poti-Pin | Nach |
+|---|---|---|
+| Kabel 6 (rot) | Linker Pin | **+** Leiste (rot/5V) |
+| Kabel 7 (schwarz) | Rechter Pin | **-** Leiste (blau/GND) |
+| Kabel 8 (gelb) | Mittlerer Pin | **Reihe 3** z.B. Loch **a3** (= LCD Pin 3 / V0) |
+
+> **Wie rum stecke ich das Poti?** Egal! Wenn du es "falsch" rum steckst, dreht der
+> Kontrast halt in die andere Richtung. Kaputt geht nichts.
+
+---
+
+### Schritt 5: LCD Datenkabel zum Arduino
+
+Jetzt kommen die Kabel die das LCD mit dem Arduino verbinden.
+Nimm am besten verschiedene Farben, damit du sie spaeter unterscheiden kannst.
+
+| Kabel | Von (Breadboard-Reihe = LCD Pin) | Nach (Arduino Mega Pin) |
+|---|---|---|
+| Kabel 9 (gruen) | **Reihe 4** z.B. Loch **a4** (= LCD Pin 4 / RS) | Arduino **Digital Pin 12** |
+| Kabel 10 (blau) | **Reihe 6** z.B. Loch **a6** (= LCD Pin 6 / E) | Arduino **Digital Pin 11** |
+| Kabel 11 (orange) | **Reihe 11** z.B. Loch **a11** (= LCD Pin 11 / D4) | Arduino **Digital Pin 5** |
+| Kabel 12 (gelb) | **Reihe 12** z.B. Loch **a12** (= LCD Pin 12 / D5) | Arduino **Digital Pin 4** |
+| Kabel 13 (gruen) | **Reihe 13** z.B. Loch **a13** (= LCD Pin 13 / D6) | Arduino **Digital Pin 3** |
+| Kabel 14 (blau) | **Reihe 14** z.B. Loch **a14** (= LCD Pin 14 / D7) | Arduino **Digital Pin 2** |
+
+> **Wo finde ich die Pins am Arduino Mega?**
+> Die digitalen Pins sind auf der langen Seite des Boards beschriftet.
+> Pin 2-13 sind nebeneinander. Pin 18 ist im Bereich "COMMUNICATION" 
+> (TX1) - da steht "18" daneben.
+
+> **LCD Pins 7, 8, 9, 10 bleiben frei!** Da steckt KEIN Kabel rein.
+> Wir nutzen den "4-Bit-Modus" - das heisst wir brauchen nur 4 Datenleitungen
+> statt 8. Das spart Kabel und Arduino-Pins.
+
+---
+
+### Schritt 6: Arduino GND mit Breadboard verbinden
+
+Das ist wichtig! Arduino und Breadboard muessen die gleiche Masse teilen.
+
+| Kabel | Von | Nach |
+|---|---|---|
+| Kabel 15 (schwarz) | Arduino **GND** Pin | Breadboard **-** Leiste (blau) |
+
+> Am Arduino Mega gibt es mehrere GND-Pins (neben Pin 13, neben 5V, etc.)
+> Nimm irgendeinen davon - alle sind intern verbunden.
+
+---
+
+### Schritt 7: ERSTER TEST - Nur das LCD
+
+**Bevor** wir Sensor und Luefter anschliessen, testen wir erst ob das LCD geht!
+
+1. Kontrolliere nochmal alle Kabel (siehe Tabelle oben)
+2. Stecke das **9V-Netzteil** in das Stromversorgungsmodul → Schalter auf **ON**
+3. Stecke das **USB-Kabel** vom Arduino zum PC
+4. Oeffne die **Arduino IDE**
+5. Oeffne die Datei `drehzahlmesser.ino`
+6. Board und Port korrekt eingestellt?
+7. Druecke **Upload** (Pfeil-Button)
+8. Auf dem LCD sollte jetzt stehen:
+
+```
+Drehzahlmesser
+Warte...
+```
+
+**Siehst du nichts?** → Drehe am Potentiometer! Langsam in beide Richtungen.
+Der Text wird irgendwann sichtbar. Manchmal muss man fast bis zum Anschlag drehen.
+
+**Siehst du nur helle Bloecke?** → Auch am Poti drehen. Wenn das nicht hilft,
+pruefe ob alle GND-Kabel (Pin 1, 5, 16) wirklich in der blauen Leiste stecken.
+
+**Funktioniert das LCD? Dann weiter mit Schritt 8!**
+
+---
+
+### Schritt 8: Gabellichtschranke anschliessen
+
+Die Gabellichtschranke (LM393) hat eine kleine Platine mit Pins und eine U-foermige
+Gabel mit IR-Sender und Empfaenger.
+
+**Die Platine hat 3 oder 4 Pins.** Schau was draufsteht:
+
+| Sensor-Pin | Kabel | Nach |
+|---|---|---|
+| **VCC** (oder +) | Rot | Breadboard **+** Leiste (rot/5V) |
+| **GND** (oder -) | Schwarz | Breadboard **-** Leiste (blau/GND) |
+| **D0** (oder OUT oder DO) | Weiss/Gelb | Arduino **Pin 18** |
+| A0 (falls vorhanden) | NICHTS | Nicht anschliessen |
+
+> **Warum Pin 18?** Der Arduino Mega hat spezielle Pins die SOFORT reagieren wenn
+> sich ein Signal aendert. Das nennt man "Interrupt" - wie eine Tuerklingel die
+> dich sofort unterbricht egal was du gerade tust. Bei 9000 RPM mit 7 Blaettern
+> kommen ueber 1000 Impulse pro Sekunde - da muss der Arduino blitzschnell sein!
+> Pin 18 ist einer dieser speziellen Interrupt-Pins auf dem Mega.
+
+---
+
+### Schritt 9: Luefter anschliessen
+
+| Luefter-Kabel | Nach |
+|---|---|
+| **Rot** (+) | Breadboard **+** Leiste (rot/5V) |
+| **Schwarz** (-) | Breadboard **-** Leiste (blau/GND) |
+
+> **Nur EINEN Luefter gleichzeitig anschliessen!** Das Stromversorgungsmodul
+> schafft beide zusammen, aber zum Testen reicht einer.
+
+---
+
+### Schritt 10: Luefter an der Lichtschranke positionieren
+
+Das ist der kniffligste Teil:
+
+1. Die Luefterblaetter muessen **durch die U-foermige Gabel** der Lichtschranke laufen
+2. Bei 30mm Lueftern: Positioniere den Sensor so, dass die **Blattspitzen**
+   durch den Spalt fahren
+3. Der Sensor muss **stabil stehen** - mit Blu-Tack, Klebeband oder einfach
+   festhalten zum Testen
+
+```
+  Seitenansicht:
+
+       Lichtschranke (U-Form)
+       |  IR  |
+       | Sender|          |Empfaenger|
+       |  ↓   |          |    ↓     |
+       |      |          |          |
+       |   ===X==========X===      |     ← Luefterblatt faehrt durch
+       |      |          |          |
+       |______|          |__________|
+
+  Die Blaetter muessen den IR-Strahl unterbrechen!
+```
+
+4. Wenn alles laeuft, sollte auf dem LCD stehen:
+
+```
+Drehzahlmesser
+RPM: 6420
+```
+
+(Der Wert haengt natuerlich von deinem Luefter ab)
+
+---
+
+### Falls die Blaetter NICHT durch die Gabel passen
+
+Bei 30mm Lueftern kann es sein, dass die Gabel zu eng ist. Dann:
+→ Nimm stattdessen den **IR-Reflexionssensor (FC-51)**, siehe Abschnitt
+  "Alternative" weiter unten in dieser Datei.
 
 ---
 
