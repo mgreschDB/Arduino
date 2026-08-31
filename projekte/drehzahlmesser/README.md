@@ -15,6 +15,18 @@ verschiedene Luefter drehen.
 
 Beide Luefter haben **7 Blaetter** und **2 Kabel** (kein Tachosignal).
 
+## Messergebnisse
+
+| Luefter | Gemessene RPM | Bemerkung |
+|---|---|---|
+| Sunon MF30060V1-1000U-A99 | ~8700 RPM | MagLev-Lager, sehr schnell, leiser |
+| LD3007MS (No-Name) | ~3600 RPM | Standard-Lager, deutlich langsamer |
+
+**Fazit:** Der Sunon dreht ca. 2.5x so schnell wie der No-Name-Luefter.
+Das MagLev-Lager (Magnetlager) des Sunon ermoeglicht hoehere Drehzahlen bei weniger Verschleiss.
+
+**Status: ABGESCHLOSSEN** (2026-08-27)
+
 ---
 
 ## Benoetigte Bauteile
