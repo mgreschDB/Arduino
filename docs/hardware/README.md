@@ -477,9 +477,11 @@ Dateiname: `bauteil-name.jpg` (z.B. `lcd-1602.jpg`, `trimmer-poti-10k.jpg`)
 | **Pins** | 4 (VCC, GND, SCL, SDA) - I2C |
 | **Spannung** | 3.3V - 5V |
 | **Bibliothek** | Adafruit SSD1306 + Adafruit GFX |
-| **Erkennungsmerkmal** | Winziges Display, ca. 2.5x1.5cm, 4 Pins, sehr duenn |
-| **Gekauft** | Amazon (kommt Dienstag) |
-| **Eingesetzt in** | - |
+| **Erkennungsmerkmal** | Winziges Display, ca. 2.5x1.5cm, 4 Pins (GND, VCC, SCL, SDA), sehr duenn |
+| **Anschluss am Mega** | GND→GND, VCC→5V, SCL→Pin 21, SDA→Pin 20 |
+| **I2C-Adresse** | 0x3C (manche 0x3D) |
+| **Gekauft** | Amazon (vorhanden) |
+| **Eingesetzt in** | Drehzahlmesser (OLED-Version) |
 
 ---
 

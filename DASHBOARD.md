@@ -89,6 +89,7 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | 2026-08-27 | Drehzahlmesser-Projekt gestartet (Gabellichtschranke + LCD 1602) |
 | 2026-08-27 | Drehzahlmesser ABGESCHLOSSEN - Sunon ~8700 RPM, LD3007MS ~3600 RPM |
 | 2026-08-27 | Erkenntnis: Trimmer-Poti (10K, 3 Beinchen) vs. Rotary Encoder (5 Pins) unterscheiden! |
+| 2026-08-27 | OLED-Display angekommen, OLED-Version des Drehzahlmessers erstellt (SSD1306, I2C) |
 
 ---
 
@@ -113,7 +114,7 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | ESP8266 WiFi-Modul | Vorhanden | - |
 | HC-05/HC-06 Bluetooth-Modul | Vorhanden | - |
 | WS2812B LED-Streifen | Vorhanden | - |
-| OLED-Display 0.96" SSD1306 | Kommt Dienstag | - |
+| OLED-Display 0.96" SSD1306 | Vorhanden | Drehzahlmesser (OLED-Version) |
 
 ---
 

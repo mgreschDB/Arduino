@@ -29,6 +29,82 @@ Das MagLev-Lager (Magnetlager) des Sunon ermoeglicht hoehere Drehzahlen bei weni
 
 ---
 
+## Zwei Display-Varianten
+
+Dieses Projekt gibt es in zwei Versionen:
+
+| Version | Sketch-Datei | Display | Besonderheit |
+|---|---|---|---|
+| **LCD-Version** | `drehzahlmesser.ino` | LCD 1602 (16 Pins) | Braucht Poti fuer Kontrast |
+| **OLED-Version** | `drehzahlmesser_oled.ino` | OLED 0.96" SSD1306 (4 Pins) | Kein Poti, grosse Zahl + Balken |
+
+Waehle die Version je nachdem welches Display du nutzen willst.
+
+---
+
+## OLED-Version (SSD1306) - Verkabelung
+
+Das OLED-Display hat nur **4 Pins** und wird ueber I2C angeschlossen (2 Datenleitungen).
+Viel einfacher als das LCD! Es braucht **kein Potentiometer und keinen Widerstand**.
+
+### Benoetigte Bibliotheken (Arduino IDE)
+
+Vor dem Hochladen in der Arduino IDE installieren:
+(Sketch → Bibliothek einbinden → Bibliotheken verwalten → suchen → installieren)
+
+- **Adafruit SSD1306**
+- **Adafruit GFX Library**
+
+> Beim Installieren von "Adafruit SSD1306" fragt die IDE evtl. ob abhaengige
+> Bibliotheken mitinstalliert werden sollen → mit "Install all" bestaetigen.
+
+### Verkabelung OLED → Arduino Mega
+
+Die Pin-Reihenfolge auf dem Display: **GND, VCC, SCL, SDA**
+
+| OLED-Pin | Kabelfarbe | Arduino Mega |
+|---|---|---|
+| **GND** | Schwarz | GND |
+| **VCC** | Rot | 5V |
+| **SCL** | Gelb | **Pin 21** (SCL) |
+| **SDA** | Blau | **Pin 20** (SDA) |
+
+> **Wichtig beim Mega:** I2C liegt auf Pin 20 (SDA) und Pin 21 (SCL).
+> Beim Uno waeren das andere Pins (A4/A5) - aber du hast ja den Mega!
+
+### Sensor und Luefter
+
+Sensor und Luefter bleiben genau wie bei der LCD-Version:
+
+| Anschluss | Nach |
+|---|---|
+| Sensor **VCC** | 5V (Breadboard + Leiste) |
+| Sensor **GND** | GND (Breadboard - Leiste) |
+| Sensor **D0/OUT** | Arduino **Pin 18** |
+| Luefter **rot** | 5V |
+| Luefter **schwarz** | GND |
+
+### Was du auf dem OLED siehst
+
+```
+Drehzahlmesser
+8700          <- grosse Zahl
+RPM      Max:8700
+[##########........]  <- Balken
+```
+
+### Fehlermeldung "OLED nicht gefunden"?
+
+Wenn im Seriellen Monitor "FEHLER: OLED nicht gefunden" steht:
+- SDA an Pin 20? SCL an Pin 21? (nicht vertauscht?)
+- VCC und GND richtig?
+- Falls immer noch nichts: Manche OLEDs haben die I2C-Adresse 0x3D statt 0x3C.
+  Dann im Code `OLED_ADRESSE` von `0x3C` auf `0x3D` aendern.
+
+---
+
+---
+
 ## Benoetigte Bauteile
 
 | Bauteil | Anzahl | Aus dem Kit? |
