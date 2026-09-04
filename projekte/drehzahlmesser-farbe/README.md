@@ -38,16 +38,20 @@ Wichtig: Beim Arduino **Mega** liegen die Hardware-SPI-Pins auf 51 (MOSI/DIN) un
 52 (SCK/CLK) - anders als beim Uno! Deshalb weicht diese Anleitung von der
 offiziellen Waveshare-Uno-Anleitung ab.
 
-| Display-Pin | Bedeutung | Arduino Mega | Kabelfarbe |
+| Display-Pin | Bedeutung | Arduino Mega | Kabelfarbe (dein Modul) |
 |---|---|---|---|
-| **VCC** | Stromversorgung | **5V** | Rot |
-| **GND** | Masse | **GND** | Schwarz |
-| **DIN** | Daten (MOSI) | **Pin 51** | Blau |
-| **CLK** | Takt (SCK) | **Pin 52** | Gelb |
-| **CS** | Chip Select | **Pin 10** | Orange |
-| **DC** | Data/Command | **Pin 9** | Gruen |
-| **RST** | Reset | **Pin 8** | Weiss |
-| **BL** | Hintergrundbeleuchtung | **5V** | Rot |
+| **VCC** | Stromversorgung | **5V** | Lila |
+| **GND** | Masse | **GND** | Weiss |
+| **DIN** | Daten (MOSI) | **Pin 51** | Gruen |
+| **CLK** | Takt (SCK) | **Pin 52** | Orange |
+| **CS** | Chip Select | **Pin 10** | Gelb |
+| **DC** | Data/Command | **Pin 9** | Blau |
+| **RST** | Reset | **Pin 8** | Braun |
+| **BL** | Hintergrundbeleuchtung | **5V** | Grau |
+
+> **Hinweis zu den Kabelfarben:** Diese Farben gelten fuer das mitgelieferte
+> Kabel dieses Moduls. Verlass dich im Zweifel immer auf die **Beschriftung
+> auf der Platine** (VCC, GND, DIN, ...) - die Farbe ist nur eine Hilfe.
 
 > **BL (Backlight):** Direkt an 5V anschliessen = Beleuchtung immer an.
 > (Man koennte BL auch an einen PWM-Pin haengen um zu dimmen, brauchen wir aber nicht.)
