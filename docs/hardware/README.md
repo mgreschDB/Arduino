@@ -483,6 +483,22 @@ Dateiname: `bauteil-name.jpg` (z.B. `lcd-1602.jpg`, `trimmer-poti-10k.jpg`)
 | **Gekauft** | Amazon (vorhanden) |
 | **Eingesetzt in** | Drehzahlmesser (OLED-Version) |
 
+### Waveshare 2" LCD Modul (ST7789, IPS Farbe)
+
+| | |
+|---|---|
+| **Foto** | ![Waveshare 2 Zoll](bilder/waveshare-2inch-st7789.jpg) |
+| **Beschreibung** | Farbdisplay mit IPS-Panel, 240x320 Pixel. Zeigt Grafiken, Text, Farben. |
+| **Treiber** | ST7789V |
+| **Anschluss** | SPI (4-Draht) |
+| **Pins** | 8 (VCC, GND, DIN, CLK, CS, DC, RST, BL) |
+| **Spannung** | 3.3V/5V (bei Arduino: 5V verwenden!) |
+| **Bibliothek** | Adafruit ST7735/ST7789 + Adafruit GFX |
+| **Anschluss am Mega** | VCC→5V, GND→GND, DIN→51, CLK→52, CS→10, DC→9, RST→8, BL→5V |
+| **Erkennungsmerkmal** | Farbdisplay ca. 5.8x3.5cm, IPS, 8-Pin-Stecker |
+| **Gekauft** | Amazon (Waveshare, vorhanden) |
+| **Eingesetzt in** | Drehzahlmesser (Farbversion) |
+
 ---
 
 ## So fuegst du Fotos hinzu

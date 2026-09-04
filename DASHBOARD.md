@@ -90,6 +90,7 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | 2026-08-27 | Drehzahlmesser ABGESCHLOSSEN - Sunon ~8700 RPM, LD3007MS ~3600 RPM |
 | 2026-08-27 | Erkenntnis: Trimmer-Poti (10K, 3 Beinchen) vs. Rotary Encoder (5 Pins) unterscheiden! |
 | 2026-08-27 | OLED-Display angekommen, OLED-Version des Drehzahlmessers erstellt (SSD1306, I2C) |
+| 2026-08-27 | Waveshare 2" Farbdisplay (ST7789) angekommen, Farbversion mit Tacho-Balken erstellt |
 
 ---
 
@@ -115,6 +116,7 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | HC-05/HC-06 Bluetooth-Modul | Vorhanden | - |
 | WS2812B LED-Streifen | Vorhanden | - |
 | OLED-Display 0.96" SSD1306 | Vorhanden | Drehzahlmesser (OLED-Version) |
+| Waveshare 2" LCD (ST7789, IPS) | Vorhanden | Drehzahlmesser (Farbversion) |
 
 ---
 
