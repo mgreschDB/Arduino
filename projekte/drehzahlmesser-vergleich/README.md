@@ -199,6 +199,5 @@ Pin 20 und 21 sind fuer I2C reserviert (falls du spaeter das OLED zusaetzlich wi
 Beide Tachos zeigen die Drehzahl mit roter Nadel, RPM-Zahl und Live-Vergleich.
 Beispielmessung: Luefter A = 3214 RPM, Luefter B = 7740 RPM.
 
-<!-- Ergebnisfoto: lege ein Foto als ergebnis.jpg in diesen Ordner -->
-<!-- ![Ergebnis](ergebnis.jpg) -->
+![Ergebnis: Zwei Tachos auf dem Waveshare 2 Zoll Display](IMG_0768.jpeg)
 
