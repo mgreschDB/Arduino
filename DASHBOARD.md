@@ -65,6 +65,8 @@
 | Farbdisplay & Grafik (ST7789/GFX) | Drehzahlmesser (Farbe) | :green_circle: |
 | Funktionen schreiben | Drehzahlmesser (alle) | :green_circle: |
 | map() Werte umrechnen | Drehzahlmesser (Farbe) | :green_circle: |
+| Mehrere Interrupts gleichzeitig | Drehzahlmesser (Vergleich) | :green_circle: |
+| Trigonometrie (sin/cos fuer Nadel) | Drehzahlmesser (Vergleich) | :green_circle: |
 | Analoge Eingaenge (analogRead) | - | - |
 | PWM-Signale | - | - |
 | Arrays und Schleifen | - | - |
@@ -95,6 +97,7 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | 2026-08-27 | OLED-Display angekommen, OLED-Version des Drehzahlmessers erstellt (SSD1306, I2C) |
 | 2026-08-27 | Waveshare 2" Farbdisplay (ST7789) angekommen, Farbversion mit Tacho-Balken erstellt |
 | 2026-08-27 | Farbversion laeuft erfolgreich - Drehzahlmesser jetzt in 3 Display-Varianten (LCD, OLED, Farbe) |
+| 2026-08-27 | Vergleichsversion erstellt: 2 Sensoren (Pin 18+19), 2 runde Tachos mit Nadel, Live-Vergleich |
 
 ---
 
@@ -102,12 +105,12 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 
 | Kategorie | Anzahl |
 |---|---|
-| Verschiedene Sensoren genutzt | 1 / 8 (Gabellichtschranke LM393) |
+| Verschiedene Sensoren genutzt | 1 / 8 (Gabellichtschranke LM393, jetzt 2x parallel) |
 | Verschiedene Aktoren genutzt | 0 / 5 |
 | Bibliotheken installiert | 4 (LiquidCrystal, Adafruit SSD1306, GFX, ST7789) |
 | Displays angesteuert | 3 (LCD 1602, OLED SSD1306, Waveshare ST7789) |
-| Code-Zeilen geschrieben | ~400 |
-| Stunden investiert | ~4 |
+| Code-Zeilen geschrieben | ~600 |
+| Stunden investiert | ~5 |
 
 ---
 
