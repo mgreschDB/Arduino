@@ -61,6 +61,84 @@ offiziellen Waveshare-Uno-Anleitung ab.
 
 ---
 
+## Verkabelungs-Schaubild
+
+So sieht die Verbindung aus. Links das Display (8 Pins von oben nach unten),
+rechts der Arduino Mega:
+
+```
+   WAVESHARE 2" DISPLAY                    ARDUINO MEGA 2560
+   +------------------+
+   |                  |
+   |   2inch LCD      |
+   |   ST7789V        |
+   |   240x320        |
+   |                  |
+   +------------------+
+     |                                    
+     | Pin      Kabel                     Anschluss am Mega
+     |
+     +-- VCC ... Lila  ------------------> 5V         (Power-Leiste)
+     +-- GND ... Weiss ------------------> GND        (Power-Leiste)
+     +-- DIN ... Gruen ------------------> Pin 51     (MOSI, im Block "COMMUNICATION")
+     +-- CLK ... Orange -----------------> Pin 52     (SCK,  daneben)
+     +-- CS  ... Gelb  ------------------> Pin 10     (Digital-Leiste PWM)
+     +-- DC  ... Blau  ------------------> Pin 9      (Digital-Leiste PWM)
+     +-- RST ... Braun ------------------> Pin 8      (Digital-Leiste PWM)
+     +-- BL  ... Grau  ------------------> 5V         (Power-Leiste, immer an)
+```
+
+### Wo finde ich die Pins am Arduino Mega?
+
+Der Arduino Mega hat mehrere Pin-Bloecke. Hier die Fundorte:
+
+```
+                 ARDUINO MEGA 2560 (Draufsicht)
+   +-----------------------------------------------------------+
+   |  [USB]                                        [Power-Jack]|
+   |                                                           |
+   |  DIGITAL (PWM)                                            |
+   |  22 23 24 ... (viele Pins)                                |
+   |                                                           |
+   |         Pin 13 12 11 10  9  8  7 ...                      |  <- CS=10, DC=9, RST=8
+   |                                                           |     hier oben rechts
+   |                                                           |
+   |  [ Mega-Chip ]                     COMMUNICATION          |
+   |                                    50 51 52 53            |  <- DIN=51, CLK=52
+   |                                                           |     Block unten
+   |  POWER          ANALOG IN                                 |
+   |  5V GND GND Vin  A0 A1 A2 ...                             |  <- 5V und GND hier
+   +-----------------------------------------------------------+
+```
+
+- **5V und GND:** Im "POWER"-Block an der unteren Kante. Es gibt mehrere GND-Pins,
+  nimm irgendeinen. Fuer VCC und BL (beide an 5V) brauchst du 2x 5V - nutze dafuer
+  die 5V-Leiste am Breadboard, dann kannst du beide anschliessen.
+- **Pin 8, 9, 10:** Im "DIGITAL"-Block, oben rechts, in der Zahlenreihe.
+- **Pin 51, 52:** Im "COMMUNICATION"-Block (die kurze Doppelreihe neben dem Chip).
+  Dort sind die Pins 50-53. Pin 51 = MOSI, Pin 52 = SCK.
+
+### Tipp: 5V zweimal gebraucht (VCC + BL)
+
+Da sowohl VCC als auch BL an 5V muessen, aber der Mega nur begrenzt 5V-Pins hat:
+- Verbinde ein Kabel von Arduino **5V** zur **roten Leiste (+)** deines Breadboards
+- Stecke dann VCC (Lila) UND BL (Grau) beide in die rote Leiste
+- Genauso mit GND: ein Kabel von Arduino **GND** zur **blauen Leiste (-)**,
+  dann GND (Weiss) und spaeter den Sensor-GND dort anschliessen
+
+```
+  Arduino 5V  ----> [ rote Leiste + ] <---- VCC (Lila)
+                                      <---- BL  (Grau)
+                                      <---- Sensor VCC
+                                      <---- Luefter rot
+
+  Arduino GND ----> [ blaue Leiste - ] <--- GND (Weiss)
+                                       <--- Sensor GND
+                                       <--- Luefter schwarz
+```
+
+---
+
 ## Sensor und Luefter
 
 Wie beim normalen Drehzahlmesser:
@@ -77,24 +155,47 @@ Wie beim normalen Drehzahlmesser:
 
 ## Aufbau Schritt fuer Schritt
 
-### Schritt 1: Display verkabeln
-Verbinde die 8 Display-Pins nach der Tabelle oben mit dem Arduino Mega.
-Am besten ueber das Breadboard oder mit Female-Female-Kabeln direkt.
+> Arbeite immer OHNE Strom (USB abgezogen, Netzteil aus). Erst alles stecken,
+> kontrollieren, DANN Strom rein.
 
-### Schritt 2: Bibliotheken installieren
-Adafruit ST7735/ST7789 + Adafruit GFX (siehe oben).
+### Schritt 1: Stromleisten vorbereiten
+1. Kabel von Arduino **5V** → **rote Leiste (+)** am Breadboard
+2. Kabel von Arduino **GND** → **blaue Leiste (-)** am Breadboard
 
-### Schritt 3: Code hochladen
-1. Datei `drehzahlmesser_farbe.ino` in der Arduino IDE oeffnen
-2. Board = "Arduino Mega or Mega 2560", Port pruefen
-3. Upload druecken
+### Schritt 2: Display-Strom anschliessen
+3. **VCC** (Lila) → rote Leiste (+)
+4. **BL** (Grau) → rote Leiste (+)
+5. **GND** (Weiss) → blaue Leiste (-)
 
-### Schritt 4: Erster Test
+### Schritt 3: Display-Datenleitungen zum Arduino
+6. **DIN** (Gruen) → Pin 51
+7. **CLK** (Orange) → Pin 52
+8. **CS** (Gelb) → Pin 10
+9. **DC** (Blau) → Pin 9
+10. **RST** (Braun) → Pin 8
+
+### Schritt 4: Kontrolle
+Geh die 10 Verbindungen nochmal durch. Sitzt jedes Kabel fest?
+Steckt nichts schief oder in der falschen Reihe?
+
+### Schritt 5: Bibliotheken installieren
+Adafruit ST7735/ST7789 + Adafruit GFX (siehe oben), falls noch nicht geschehen.
+
+### Schritt 6: Code hochladen
+1. USB-Kabel Arduino → PC einstecken
+2. Datei `drehzahlmesser_farbe.ino` in der Arduino IDE oeffnen
+3. Board = "Arduino Mega or Mega 2560", Port pruefen
+4. Upload druecken
+
+### Schritt 7: Erster Test (nur Display)
 Nach dem Upload sollte das Display schwarz werden und oben "Drehzahlmesser"
-in Cyan anzeigen, darunter "RPM" und "Max:".
+in Cyan anzeigen, darunter "RPM" und "Max:". Die grosse Zahl zeigt erstmal 0.
 
-### Schritt 5: Sensor und Luefter anschliessen
-Dann den Luefter starten und die Blaetter durch die Lichtschranke laufen lassen.
+### Schritt 8: Sensor und Luefter anschliessen
+1. Sensor **VCC** → rote Leiste, **GND** → blaue Leiste, **D0/OUT** → Pin 18
+2. Luefter **rot** → rote Leiste, **schwarz** → blaue Leiste
+3. Luefterblaetter durch die Gabel der Lichtschranke positionieren
+4. Strom an - die Zahl sollte jetzt die Drehzahl anzeigen
 
 ---
 
