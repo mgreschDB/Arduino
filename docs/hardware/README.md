@@ -464,9 +464,14 @@ Dateiname: `bauteil-name.jpg` (z.B. `lcd-1602.jpg`, `trimmer-poti-10k.jpg`)
 | **Kabel** | 3 (5V, GND, DIN/Data) |
 | **Spannung** | 5V |
 | **Bibliothek** | Adafruit NeoPixel oder FastLED |
-| **Erkennungsmerkmal** | Flexibler Streifen mit vielen kleinen quadratischen LEDs |
+| **Erkennungsmerkmal** | Flexibler Streifen mit vielen kleinen quadratischen LEDs, Pfeile zeigen Datenrichtung |
+| **Anzahl LEDs** | 144 |
+| **Kabel** | Rot=5V, Weiss=GND, Gruen=DIN, extra dickes Rot=zusaetzl. 5V |
+| **Farbreihenfolge** | GRB |
+| **Bibliothek** | FastLED |
+| **STROMWARNUNG** | Bis 8.6A bei voller Helligkeit! Immer Helligkeit begrenzen + externes Netzteil |
 | **Gekauft** | Amazon |
-| **Eingesetzt in** | - |
+| **Eingesetzt in** | LED-Streifen Effekte |
 
 ### OLED-Display 0.96" SSD1306
 

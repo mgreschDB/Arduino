@@ -25,6 +25,7 @@
 | # | Projekt | Schwierigkeit | Status | Datum Start | Datum Fertig |
 |---|---|---|---|---|---|
 | -- | **Drehzahlmesser (Luefter RPM)** | :yellow_circle: Leicht Fortgeschritten | :green_circle: Abgeschlossen | 2026-08-27 | 2026-08-27 |
+| -- | **LED-Streifen Effekte (WS2812B)** | :yellow_circle: Leicht Fortgeschritten | :large_blue_circle: In Arbeit | 2026-08-27 | - |
 | 01 | Blinkende LED | :green_circle: Anfaenger | :white_circle: Geplant | - | - |
 | 02 | Ampelschaltung | :green_circle: Anfaenger | :white_circle: Geplant | - | - |
 | 03 | Temperatur-/Feuchtigkeitssensor | :green_circle: Anfaenger | :white_circle: Geplant | - | - |
@@ -99,6 +100,7 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | 2026-08-27 | Farbversion laeuft erfolgreich - Drehzahlmesser jetzt in 3 Display-Varianten (LCD, OLED, Farbe) |
 | 2026-08-27 | Vergleichsversion erstellt: 2 Sensoren (Pin 18+19), 2 runde Tachos mit Nadel, Live-Vergleich |
 | 2026-08-27 | Vergleichsversion laeuft erfolgreich! Beide Tachos + Nadeln + Vergleich funktionieren |
+| 2026-08-27 | Neues Projekt: LED-Streifen (144x WS2812B) mit FastLED, 5 Effekte, Strombegrenzung |
 
 ---
 
@@ -107,7 +109,7 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | Kategorie | Anzahl |
 |---|---|
 | Verschiedene Sensoren genutzt | 1 / 8 (Gabellichtschranke LM393, jetzt 2x parallel) |
-| Verschiedene Aktoren genutzt | 0 / 5 |
+| Verschiedene Aktoren genutzt | 1 / 5 (WS2812B LED-Streifen) |
 | Bibliotheken installiert | 4 (LiquidCrystal, Adafruit SSD1306, GFX, ST7789) |
 | Displays angesteuert | 3 (LCD 1602, OLED SSD1306, Waveshare ST7789) |
 | Code-Zeilen geschrieben | ~600 |
