@@ -98,6 +98,7 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | 2026-08-27 | Waveshare 2" Farbdisplay (ST7789) angekommen, Farbversion mit Tacho-Balken erstellt |
 | 2026-08-27 | Farbversion laeuft erfolgreich - Drehzahlmesser jetzt in 3 Display-Varianten (LCD, OLED, Farbe) |
 | 2026-08-27 | Vergleichsversion erstellt: 2 Sensoren (Pin 18+19), 2 runde Tachos mit Nadel, Live-Vergleich |
+| 2026-08-27 | Vergleichsversion laeuft erfolgreich! Beide Tachos + Nadeln + Vergleich funktionieren |
 
 ---
 
