@@ -59,11 +59,14 @@
 | Serieller Monitor | Drehzahlmesser | :green_circle: |
 | Breadboard & Verkabelung | Drehzahlmesser | :green_circle: |
 | Externe Stromversorgung (Breadboard PSU) | Drehzahlmesser | :green_circle: |
+| OLED ansteuern (SSD1306) | Drehzahlmesser (OLED) | :green_circle: |
+| I2C-Kommunikation | Drehzahlmesser (OLED) | :green_circle: |
+| SPI-Kommunikation | Drehzahlmesser (Farbe) | :green_circle: |
+| Farbdisplay & Grafik (ST7789/GFX) | Drehzahlmesser (Farbe) | :green_circle: |
+| Funktionen schreiben | Drehzahlmesser (alle) | :green_circle: |
+| map() Werte umrechnen | Drehzahlmesser (Farbe) | :green_circle: |
 | Analoge Eingaenge (analogRead) | - | - |
 | PWM-Signale | - | - |
-| I2C-Kommunikation | - | - |
-| SPI-Kommunikation | - | - |
-| Funktionen schreiben | - | - |
 | Arrays und Schleifen | - | - |
 
 ---
@@ -91,6 +94,7 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 | 2026-08-27 | Erkenntnis: Trimmer-Poti (10K, 3 Beinchen) vs. Rotary Encoder (5 Pins) unterscheiden! |
 | 2026-08-27 | OLED-Display angekommen, OLED-Version des Drehzahlmessers erstellt (SSD1306, I2C) |
 | 2026-08-27 | Waveshare 2" Farbdisplay (ST7789) angekommen, Farbversion mit Tacho-Balken erstellt |
+| 2026-08-27 | Farbversion laeuft erfolgreich - Drehzahlmesser jetzt in 3 Display-Varianten (LCD, OLED, Farbe) |
 
 ---
 
@@ -100,9 +104,10 @@ _Hier trage ich Notizen ein, die waehrend der Projekte entstehen._
 |---|---|
 | Verschiedene Sensoren genutzt | 1 / 8 (Gabellichtschranke LM393) |
 | Verschiedene Aktoren genutzt | 0 / 5 |
-| Bibliotheken installiert | 1 / 7 (LiquidCrystal) |
-| Code-Zeilen geschrieben | ~120 |
-| Stunden investiert | ~2 |
+| Bibliotheken installiert | 4 (LiquidCrystal, Adafruit SSD1306, GFX, ST7789) |
+| Displays angesteuert | 3 (LCD 1602, OLED SSD1306, Waveshare ST7789) |
+| Code-Zeilen geschrieben | ~400 |
+| Stunden investiert | ~4 |
 
 ---
 
