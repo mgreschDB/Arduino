@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Worklog-Erinnerung",
+      "trigger": "Stop",
+      "action": {
+        "type": "agent",
+        "prompt": "Prüfe, ob in dieser Sitzung nennenswerte Änderungen gemacht wurden. Falls ja und WORKLOG.md noch nicht aktualisiert ist, ergänze einen Eintrag für das heutige Datum (Ziele, Erledigt, Probleme & Lösungen) und pflege bei Bedarf ISSUES.md und CHANGELOG.md gemäß dem Doku-Standard."
+      }
+    }
+  ]
+}
