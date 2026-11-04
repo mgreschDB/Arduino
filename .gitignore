@@ -26,3 +26,6 @@ venv/
 .venv/
 *.db
 node_modules/
+
+# Elegoo-Tutorial (Fremddaten, reproduzierbar via Elegoo-Download; aufs NAS)
+ELEGOO Basic Starter Kit for Mega 2560 V1.0.2023.05.08/
